@@ -18,9 +18,18 @@
 }
 .BingoGameBoard .bingo-game-board td{
     cursor: pointer;
+    width: 20%;
 }
-.BingoGameBoard .bingo-game-board td:hover{
+
+.BingoGameBoard .bingo-game-board td.selected{
+    background-color: skyblue;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.BingoGameBoard .bingo-game-board-start td:hover{
     background-color: cornflowerblue;
+    color: #fff;
 }
 
 .BingoGameBoard .letf-player{

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Grid, Header, Container ,Button } from 'semantic-ui-react'
 import BigoGameBoard from '../BingoGameBoard'
+import GameLog from '../GameLog'
 import './MainPage.css'
 
-export default function MainPageLayOut() {
+export default function MainPageLayOut({ gameTurn, players, resetButtonClickHandler}) {
     return (
         <Container>
             <Grid id="MainPage" textAlign='center' verticalAlign='middle'>
@@ -17,20 +18,25 @@ export default function MainPageLayOut() {
                     </Grid>
                     <Grid className="content">
                         <BigoGameBoard
-                            playerId={1}
+                            gameTurn={gameTurn}
+                            player={players[0]}
                         />
                         <div className="status">
                             <div className="log">
-
+                                <GameLog/>
                             </div>
                             <div className="buttons">
-                                <Button size="massive" color="facebook">
-                                    Game Start
+                                <Button 
+                                    onClick={resetButtonClickHandler}
+                                    size="massive" color="facebook"
+                                    >
+                                    {gameTurn === -1 ? `Game Start` : `Game Reset`}
                                 </Button>
                             </div>
                         </div>
                         <BigoGameBoard
-                            playerId={2}
+                            gameTurn={gameTurn}
+                            player={players[1]}
                         />
                     </Grid>
                 </Grid.Column>

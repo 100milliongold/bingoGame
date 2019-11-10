@@ -1,99 +1,45 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 import './BingoGameBoard.css'
+import * as _ from "fxjs2/Strict/index.js";
+import * as L from "fxjs2/Lazy/index.js";
 
-export default function BingoGameBoardLayout({ playerId }) {
+// window.L = L;
+// window._ = _;
+
+export default function BingoGameBoardLayout({ playerId, bingoList, gameTurn, bingoButtonClick, callNumbers}) {
     return (
         <div className={`BingoGameBoard ${playerId === 1 ? "left-player" : "rigth-player"}`}>
-            <p className="player-name">{`player ${playerId}`}</p>
+            <p className="player-name">{`player ${playerId + 1}`}</p>
             <div className="player-game">
-                <Table textAlign="center" className="bingo-game-board" celled >
+                <Table textAlign="center" className={`bingo-game-board ${gameTurn === -1 ? "" :"bingo-game-board-start"}`} celled >
                     <Table.Body>
-                        <Table.Row>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                            <Table.Cell>
-
-                            </Table.Cell>
-                        </Table.Row>
+                        {
+                            _.go(
+                                bingoList.length !== 25 ? _.range(1, 26).fill(undefined) : bingoList,
+                                L.entries,
+                                _.groupBy(([k, v]) => parseInt(k) % 5),
+                                L.entries,
+                                L.flatMap(([k, v]) =>
+                                    <Table.Row key={k * 10}>
+                                        {
+                                            _.map(
+                                                ([_, num]) => (
+                                                    <Table.Cell 
+                                                        className={callNumbers.indexOf(num) !== -1 ? "selected" : "" }
+                                                        key={_} 
+                                                        onClick={e => bingoButtonClick(num)}>
+                                                        {num}
+                                                    </Table.Cell>
+                                                ),
+                                                v
+                                            )
+                                        }
+                                    </Table.Row>
+                                ),
+                                _.takeAll
+                            )
+                        }
                     </Table.Body>
                 </Table>
             </div>
@@ -101,5 +47,6 @@ export default function BingoGameBoardLayout({ playerId }) {
     )
 }
 BingoGameBoardLayout.defaultProps = {
-    playerId : 1
+    playerId : 1,
+    bingoList : [],
 }
