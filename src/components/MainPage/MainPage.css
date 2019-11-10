@@ -7,14 +7,14 @@
 }
 
 #MainPage .status{
-    padding-top: 45px;
+    padding-top: 55px;
     width: 20%;
 }
 #MainPage .status .log{
     border: 1px solid #c0c0c0;
     width: 100%;
     height: 250px;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 }
 #MainPage .status .buttons{
     width: 100%;

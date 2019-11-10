@@ -9,7 +9,7 @@ import * as L from "fxjs2/Lazy/index.js";
 
 export default function BingoGameBoardLayout({ playerId, bingoList, gameTurn, bingoButtonClick, callNumbers}) {
     return (
-        <div className={`BingoGameBoard ${playerId === 1 ? "left-player" : "rigth-player"}`}>
+        <div className={`BingoGameBoard ${playerId === 1 ? "left-player" : "rigth-player"} ${(gameTurn) === playerId ? "is-turn" : ""}`}>
             <p className="player-name">{`player ${playerId + 1}`}</p>
             <div className="player-game">
                 <Table textAlign="center" className={`bingo-game-board ${gameTurn === -1 ? "" :"bingo-game-board-start"}`} celled >
@@ -18,7 +18,7 @@ export default function BingoGameBoardLayout({ playerId, bingoList, gameTurn, bi
                             _.go(
                                 bingoList.length !== 25 ? _.range(1, 26).fill(undefined) : bingoList,
                                 L.entries,
-                                _.groupBy(([k, v]) => parseInt(k) % 5),
+                                _.groupBy(([k, v]) => Math.floor(parseInt(k) / 5)),
                                 L.entries,
                                 L.flatMap(([k, v]) =>
                                     <Table.Row key={k * 10}>

@@ -1,0 +1,8 @@
+/* GameLog */
+#GameLog{
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #fff;
+}

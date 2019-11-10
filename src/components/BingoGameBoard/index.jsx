@@ -20,9 +20,10 @@ export class BingoGameBoard extends Component {
         }
         return this.props.select_number(number);
     }
+
+
     render() {
-        console.log(this.props.callNumbers);
-        
+        // console.log(this.props.callNumbers);
         const { playerId, bingoList} = this.props.player;
         const { gameTurn } = this.props
         return (

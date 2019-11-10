@@ -7,6 +7,7 @@ export class GameLog extends Component {
         return (
             <GameLogLayout
                 gameTurn={this.props.gameTurn}
+                players={this.props.players}
             />
         )
     }
@@ -15,6 +16,7 @@ export class GameLog extends Component {
 let mapStateToProps = (state) => {
     return {
         gameTurn: state.commands.gameTurn,
+        players: state.commands.players,
     };
 }
 GameLog = connect(mapStateToProps)(GameLog);

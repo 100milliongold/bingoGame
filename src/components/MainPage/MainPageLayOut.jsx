@@ -28,7 +28,7 @@ export default function MainPageLayOut({ gameTurn, players, resetButtonClickHand
                             <div className="buttons">
                                 <Button 
                                     onClick={resetButtonClickHandler}
-                                    size="massive" color="facebook"
+                                    size="massive" color="teal"
                                     >
                                     {gameTurn === -1 ? `Game Start` : `Game Reset`}
                                 </Button>
