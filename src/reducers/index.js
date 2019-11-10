@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 import { RESET_GAMES, SELECT_NUMBER, CHANGE_TURN} from '../actions'
+import { SHOW_ALERT, CLOSE_ALERT } from '../actions'
+
 import _ from "lodash";
 import getBingoList from '../services/calculatorBingoGame'
 
@@ -35,6 +37,28 @@ const gameStatus = {
      */
     gameTurn : -1,
 };
+
+const alertStatus = {
+    is_show : false,
+    message : "",
+}
+
+const alert = (state = alertStatus , action)=>{
+    switch (action.type) {
+        case SHOW_ALERT:
+            return Object.assign({}, state, {
+                is_show: !state.is_show,
+                message: action.message,
+            })
+        case CLOSE_ALERT:
+            return Object.assign({}, state, {
+                is_show: !state.is_show,
+                message: "",
+            })
+        default:
+            return state;
+    }
+}
 
 
 
@@ -82,6 +106,7 @@ const commands = (state = gameStatus, action) => {
 
 const bingoApp = combineReducers({
     commands,
+    alert
 });
 
 export default bingoApp;

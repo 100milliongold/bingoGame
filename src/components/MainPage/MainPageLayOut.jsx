@@ -1,12 +1,14 @@
 import React from 'react'
-import { Grid, Header, Container ,Button } from 'semantic-ui-react'
+import { Grid, Header, Container, Button,  } from 'semantic-ui-react'
 import BigoGameBoard from '../BingoGameBoard'
 import GameLog from '../GameLog'
 import './MainPage.css'
+import Alert from '../Alert'
 
 export default function MainPageLayOut({ gameTurn, players, resetButtonClickHandler}) {
     return (
         <Container>
+            <Alert/>
             <Grid id="MainPage" textAlign='center' verticalAlign='middle'>
                 <Grid.Column className="content">
                     <Grid className="title">

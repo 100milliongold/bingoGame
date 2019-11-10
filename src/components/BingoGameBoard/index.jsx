@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BingoGameBoardLayout from './BingoGameBoardLayout'
-import { select_number } from '../../actions'
+import { select_number, show_alert } from '../../actions'
 import { connect } from 'react-redux';
 
 export class BingoGameBoard extends Component {
@@ -12,7 +12,7 @@ export class BingoGameBoard extends Component {
         const { playerId, } = this.props.player;
         if (number === undefined || gameTurn === -1 ) return false;
         if (playerId !== gameTurn){
-            alert('해당 차례가 아닙니다.')
+            this.props.show_alert('해당 차례가 아닙니다.')
             return false;
         }
         if (callNumbers.indexOf(number) !== -1){
@@ -58,6 +58,8 @@ let mapDispatchToProps = (dispatch) => {
          * 플레이어가 선택한 번호들을 저장
          */
         select_number: (number) => dispatch(select_number(number)),
+
+        show_alert: (message) => dispatch(show_alert(message)),
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { reset_games } from '../../actions'
+import { reset_games, show_alert, close_alert } from '../../actions'
 import MainPageLayout from './MainPageLayOut';
 import _ from 'lodash'
 
@@ -11,7 +11,6 @@ export class MainPage extends Component {
 
     componentDidMount(){
         // console.log(this.props);
-        
     }
 
     checkWinnerPlayer = (prevProps) => {
@@ -26,11 +25,11 @@ export class MainPage extends Component {
                 .value()
             if (result.length === 0) return false;
             else if (result.length === 1) {
-                alert(`${result[0].playerId + 1}P가 빙고를 완성했습니다.`);
+                this.props.showAlert(`${result[0].playerId + 1}P가 빙고를 완성했습니다.`);
                 this.props.resetButtonClick();
             }
             else if (result.length > 1) {
-                alert(`무승부 입니다.`);
+                this.props.showAlert(`무승부 입니다.`);
                 this.props.resetButtonClick();
             }
         }
@@ -45,7 +44,6 @@ export class MainPage extends Component {
         return <MainPageLayout
             gameTurn={this.props.gameTurn}
             players={this.props.players}
-
             resetButtonClickHandler={this.props.resetButtonClick}
         />
     }
@@ -63,6 +61,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         resetButtonClick: () => dispatch(reset_games()),
+        showAlert: (message) => dispatch(show_alert(message)),
     }
 }
 
